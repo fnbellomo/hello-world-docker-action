@@ -1,0 +1,26 @@
+name: Main workflow
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  run:
+    name: Run
+    runs-on: ubuntu-latest
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Init splash
+      uses: docker://scrapinghub/splash:3.5
+
+    - name: Hello world action step
+      id: hello
+      uses: ./
+      with:
+        who-to-greet: 'Mona the Octocat'
+
+    # Use the output from the `hello` step
+    - name: Get the output time
+      run: echo "The time was ${{ steps.hello.outputs.time }}"
