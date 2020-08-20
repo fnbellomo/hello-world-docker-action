@@ -1,8 +1,6 @@
 name: Main workflow
 on:
   push:
-    branches:
-      - main
 
 jobs:
   run:
