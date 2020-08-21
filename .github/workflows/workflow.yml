@@ -22,7 +22,7 @@ jobs:
       id: hello
       uses: ./
       with:
-        spider-path: 'testSpider/testSpider/spiders/quotes_spider.py'
+        spider-path: 'quotes_spider.py'
         spider-name: 'quotes'
 
     # Use the output from the `hello` step
