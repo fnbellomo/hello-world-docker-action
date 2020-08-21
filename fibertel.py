@@ -39,7 +39,8 @@ class FibertelSpider(scrapy.Spider):
 
         yield SplashRequest(url, self.get_all_location,
             endpoint='execute',
-            args={'lua_source': script}
+            args={'lua_source': script},
+            meta={'handle_httpstatus_all': True},
         )
 
     def get_all_location(self, response):
