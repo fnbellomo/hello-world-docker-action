@@ -15,16 +15,12 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Test splash
-      run: curl 'http://localhost:8050/render.html?url=https://google.com'
-
     - name: Run the spider
-      id: hello
+      id: spider
       uses: ./
       with:
-        spider-path: 'quotes_spider.py'
-        spider-name: 'quotes'
+        spider-path: 'fibertel.py'
 
     # Use the output from the `hello` step
     - name: Get the output time
-      run: echo "The time was ${{ steps.hello.outputs.time }}"
+      run: echo "The time was ${{ steps.spider.outputs.time }}"
