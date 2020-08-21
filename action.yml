@@ -5,6 +5,9 @@ inputs:
   spider-path:
     description: 'Full path to the spider'
     required: true
+  spider-name:
+    description: 'Name of the spider to run'
+    required: true
 outputs:
   time:
     description: 'The time we greeted you'

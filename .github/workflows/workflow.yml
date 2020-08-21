@@ -22,7 +22,8 @@ jobs:
       id: hello
       uses: ./
       with:
-        spider-path: 'Mona the Octocat'
+        spider-path: 'testSpider/testSpider/spiders/quotes_spider.py'
+        spider-name: 'quotes'
 
     # Use the output from the `hello` step
     - name: Get the output time
