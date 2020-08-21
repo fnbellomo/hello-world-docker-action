@@ -1,11 +1,11 @@
 #!/bin/sh -l
 
-echo "Spider path $1"
-echo "Spider name $2"
+echo "Spider file $1"
 
-cp $1 ./baseSpider/baseSpider/spiders/
-cd baseSpider
-scrapy crawl $2
+# cp $1 ./baseSpider/baseSpider/spiders/
+# cd baseSpider
+# scrapy crawl $2
+scrapy runspider $1
 
 time=$(date)
 echo "::set-output name=time::$time"
