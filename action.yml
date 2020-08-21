@@ -3,9 +3,8 @@ description: 'Greet someone and record the time'
 
 inputs:
   spider-path:
-    description: 'Who to greet'
+    description: 'Full path to the spider'
     required: true
-    default: 'World'
 outputs:
   time:
     description: 'The time we greeted you'

@@ -1,10 +1,8 @@
 name: Main workflow
-on:
-  push:
+on: [push]
 
 jobs:
-  run:
-    name: Run
+  scrape:
     runs-on: ubuntu-latest
 
     services:
@@ -20,11 +18,11 @@ jobs:
     - name: Test splash
       run: curl 'http://localhost:8050/render.html?url=https://google.com'
 
-    - name: Hello world action step
+    - name: Run the spider
       id: hello
       uses: ./
       with:
-        who-to-greet: 'Mona the Octocat'
+        spider-path: 'Mona the Octocat'
 
     # Use the output from the `hello` step
     - name: Get the output time
