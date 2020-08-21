@@ -17,6 +17,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
+    - name: Test splash
+      uses: curl 'http://localhost:8050/render.html?url=https://google.com'
+
     - name: Hello world action step
       id: hello
       uses: ./
