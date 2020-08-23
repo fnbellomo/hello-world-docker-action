@@ -16,7 +16,7 @@ class FibertelSpider(scrapy.Spider):
     name = 'fibertel'
 
     custom_settings = {
-        'SPLASH_URL': 'http://splash:8050',
+        'SPLASH_URL': 'http://localhost:8050',
         'DOWNLOADER_MIDDLEWARES': {
             'scrapy_splash.SplashCookiesMiddleware': 723,
             'scrapy_splash.SplashMiddleware': 725,
