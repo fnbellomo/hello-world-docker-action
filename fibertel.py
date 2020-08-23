@@ -22,7 +22,6 @@ class FibertelSpider(scrapy.Spider):
             'scrapy_splash.SplashMiddleware': 725,
             'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
         },
-        'RETRY_HTTP_CODES': [500, 502, 503, 504, 522, 524, 400, 408, 429]
     }
 
     def start_requests(self):
@@ -38,16 +37,12 @@ class FibertelSpider(scrapy.Spider):
 
         url = 'https://www.cablevisionfibertel.com.ar'
 
-        yield SplashRequest(url, self.test,
+        yield SplashRequest(url, self.get_for_all_location,
             endpoint='execute',
-            args={'lua_source': script},
-            # meta={'handle_httpstatus_all': True},
+            args={'lua_source': script}
         )
 
-    def test(self, response):
-        print(response.body)
-
-    def get_all_location(self, response):
+    def get_for_all_location(self, response):
         script = """
         function main(splash, args)
             splash:set_viewport_size(1980, 1020)
