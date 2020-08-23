@@ -21,7 +21,8 @@ class FibertelSpider(scrapy.Spider):
             'scrapy_splash.SplashCookiesMiddleware': 723,
             'scrapy_splash.SplashMiddleware': 725,
             'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
-        }
+        },
+        'RETRY_HTTP_CODES': [500, 502, 503, 504, 522, 524, 400, 408, 429]
     }
 
     def start_requests(self):
