@@ -15,12 +15,31 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Run the spider
-      id: spider
-      uses: ./
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
       with:
-        spider-path: 'fibertel.py'
+        python-version: '3.8'
 
-    # Use the output from the `hello` step
-    - name: Get the output time
-      run: echo "The time was ${{ steps.spider.outputs.time }}"
+    - name: Cache pip
+      uses: actions/cache@v2
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+
+    - name: Run spider
+      run: ./entrypoint.sh
+
+    # - name: Run the spider
+    #   id: spider
+    #   uses: ./
+    #   with:
+    #     spider-path: 'fibertel.py'
+
+    # # Use the output from the `hello` step
+    # - name: Get the output time
+    #   run: echo "The time was ${{ steps.spider.outputs.time }}"
