@@ -31,13 +31,13 @@ jobs:
     - name: Install dependencies
       run: pip install -r requirements.txt
 
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v2
+    # - name: Setup tmate session
+    #   uses: mxschmitt/action-tmate@v2
 
-    # - name: Run spider
-    #   run: ./entrypoint.sh
-    #   env:
-    #     SPIDER_FILE: fibertel.py
+    - name: Run spider
+      run: ./entrypoint.sh
+      env:
+        SPIDER_FILE: fibertel.py
 
     # - name: Run the spider
     #   id: spider
