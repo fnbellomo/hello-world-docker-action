@@ -35,9 +35,12 @@ jobs:
     #   uses: mxschmitt/action-tmate@v2
 
     - name: Run spider
-      run: ./entrypoint.sh
-      env:
-        SPIDER_FILE: fibertel.py
+      run: scrapy runspider fibertel.py
+
+    # - name: Run spider
+    #   run: ./entrypoint.sh
+    #   env:
+    #     SPIDER_FILE: fibertel.py
 
     # - name: Run the spider
     #   id: spider
