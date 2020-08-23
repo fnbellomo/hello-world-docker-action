@@ -37,11 +37,14 @@ class FibertelSpider(scrapy.Spider):
 
         url = 'https://www.cablevisionfibertel.com.ar'
 
-        yield SplashRequest(url, self.get_all_location,
+        yield SplashRequest(url, self.test,
             endpoint='execute',
             args={'lua_source': script},
-            meta={'handle_httpstatus_all': True},
+            # meta={'handle_httpstatus_all': True},
         )
+
+    def test(self, response):
+        print(response.body)
 
     def get_all_location(self, response):
         script = """
