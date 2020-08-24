@@ -31,23 +31,10 @@ jobs:
     - name: Install dependencies
       run: pip install -r requirements.txt
 
-    # - name: Setup tmate session
-    #   uses: mxschmitt/action-tmate@v2
-
     - name: Run spider
       run: scrapy runspider fibertel.py
 
-    # - name: Run spider
-    #   run: ./entrypoint.sh
-    #   env:
-    #     SPIDER_FILE: fibertel.py
-
-    # - name: Run the spider
-    #   id: spider
-    #   uses: ./
-    #   with:
-    #     spider-path: 'fibertel.py'
-
-    # # Use the output from the `hello` step
-    # - name: Get the output time
-    #   run: echo "The time was ${{ steps.spider.outputs.time }}"
+    - uses: actions/upload-artifact@v2
+      with:
+        name: data
+        path: fibertel/fibertel.csv

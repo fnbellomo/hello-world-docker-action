@@ -4,6 +4,8 @@ from datetime import datetime
 import scrapy
 from scrapy_splash import SplashRequest
 
+import base_pipeline
+
 class FibertelItem(scrapy.Item):
     fecha = scrapy.Field()
     provincia = scrapy.Field()
@@ -16,13 +18,27 @@ class FibertelSpider(scrapy.Spider):
     name = 'fibertel'
 
     custom_settings = {
+        'RETRY_HTTP_CODES': [400, 408, 429, 500, 502, 503, 504, 522, 524],
+
+        # For splash
         'SPLASH_URL': 'http://localhost:8050',
         'DOWNLOADER_MIDDLEWARES': {
             'scrapy_splash.SplashCookiesMiddleware': 723,
             'scrapy_splash.SplashMiddleware': 725,
             'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
         },
-        'RETRY_HTTP_CODES': [500, 502, 503, 504, 522, 524, 400, 408, 429]
+
+        'ITEM_PIPELINES': {
+            'base_pipeline.ToCsvPipeline': 300,
+            # 'base_pipeline.DataPackagedPipeline': 700,
+            # 'base_pipeline.InfluxDbPipeline': 900,
+        },
+
+        # For base pipeline
+        'CSV': {
+            'HEADER': ['fecha', 'provincia', 'ciudad', 'velocidad', 'precio'],
+            'SORT_BY': ['fecha', 'provincia']
+        }
     }
 
     def start_requests(self):
@@ -76,9 +92,8 @@ class FibertelSpider(scrapy.Spider):
         url_template = 'https://www.cablevisionfibertel.com.ar/internet/fibertel-{speed}-megas'
         locations = json.loads(response.body)['locations']
 
-        # for speed in [50, 100, 300]:
-        for speed in [50]:
-            for location in locations[:20]:
+        for speed in [50, 100, 300]:
+            for location in locations:
                 yield SplashRequest(
                     url_template.format(speed=speed),
                     self.parse,
