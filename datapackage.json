@@ -1,0 +1,62 @@
+{
+  "name": "fibertel",
+  "title": "Precios de Internet de Fibertel",
+  "profile": "tabular-data-resource",
+  "homepage": "https://gitlab.com/pewen/scrapers/fibertel",
+
+  "resources": [{
+    "name": "fibertel",
+    "path": "fibertel.csv",
+    "format": "csv",
+    "mediatype": "text/csv",
+    "encoding": "UTF-8",
+    "bytes": "",
+    "hash": "",
+    "last_updated": "",
+    "schema": {
+      "fields": [
+        {
+          "name": "fecha",
+          "type": "date",
+          "format": "YYYY-MM-DD",
+          "description": "Fecha del scrapeo"
+        },
+        {
+          "name": "provincia",
+          "type": "string"
+        },
+        {
+          "name": "ciudad",
+          "type": "string"
+        },
+        {
+          "name": "velocidad",
+          "type": "number",
+          "description": "Velocidad de la conección [MB]"
+        },
+        {
+          "name": "precio",
+          "type": "number"
+        }
+      ]
+    }
+  }],
+  "sources": [{
+    "title": "Sitio web fibertel",
+    "path": "https://www.cablevisionfibertel.com.ar"
+  }],
+  "contributors": [
+    {
+      "title": "Lucas Bellomo",
+      "role": "author"
+    },
+    {
+      "title": "Franco Bellomo",
+      "role": "author"
+    }
+  ],
+  "keywords": [
+    "fibertel",
+    "internet"
+  ]
+}

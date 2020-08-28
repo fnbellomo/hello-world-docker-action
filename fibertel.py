@@ -30,14 +30,14 @@ class FibertelSpider(scrapy.Spider):
 
         'ITEM_PIPELINES': {
             'base_pipeline.ToCsvPipeline': 300,
-            # 'base_pipeline.DataPackagedPipeline': 700,
+            'base_pipeline.DataPackagedPipeline': 500,
             # 'base_pipeline.InfluxDbPipeline': 900,
         },
 
         # For base pipeline
         'CSV': {
             'HEADER': ['fecha', 'provincia', 'ciudad', 'velocidad', 'precio'],
-            'SORT_BY': ['fecha', 'provincia']
+            'SORT_BY': ['fecha', 'provincia', 'velocidad']
         }
     }
 
@@ -92,8 +92,9 @@ class FibertelSpider(scrapy.Spider):
         url_template = 'https://www.cablevisionfibertel.com.ar/internet/fibertel-{speed}-megas'
         locations = json.loads(response.body)['locations']
 
-        for speed in [50, 100, 300]:
-            for location in locations:
+        # for speed in [50, 100, 300]:
+        for speed in [50]:
+            for location in locations[:20]:
                 yield SplashRequest(
                     url_template.format(speed=speed),
                     self.parse,

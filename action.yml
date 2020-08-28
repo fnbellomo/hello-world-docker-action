@@ -1,0 +1,21 @@
+name: 'Scrapy spider'
+description: 'An easy way to run the spiders'
+
+inputs:
+  spider-path:  # id of input
+    description: 'Path to the spider'
+    required: true
+  autocommit:
+    description: Auto commit to the repo the result of the spider
+    required: false
+
+outputs:
+  time: # id of output
+    description: 'The time we greeted you'
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  env:
+    - SPIDER_PATH: ${{ inputs.spider-path }}
+    - AUTOCOMMIT: ${{ inputs.autocommit }}

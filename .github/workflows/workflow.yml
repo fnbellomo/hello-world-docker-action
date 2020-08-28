@@ -15,26 +15,39 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Set up Python 3.8
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.8'
-
-    - name: Cache pip
-      uses: actions/cache@v2
-      with:
-        path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-        restore-keys: |
-          ${{ runner.os }}-pip-
-
-    - name: Install dependencies
-      run: pip install -r requirements.txt
-
     - name: Run spider
-      run: scrapy runspider fibertel.py
-
-    - uses: actions/upload-artifact@v2
+      uses: ./
       with:
-        name: data
-        path: fibertel/fibertel.csv
+        spider-path: fibertel.py
+        autocommit: true
+
+    # - name: Set up Python 3.8
+    #   uses: actions/setup-python@v2
+    #   with:
+    #     python-version: '3.8'
+
+    # - name: Cache pip
+    #   uses: actions/cache@v2
+    #   with:
+    #     path: ~/.cache/pip
+    #     key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+    #     restore-keys: |
+    #       ${{ runner.os }}-pip-
+
+    # - name: Install dependencies
+    #   run: pip install -r requirements.txt
+
+    # - name: Run spider
+    #   run: scrapy runspider fibertel.py
+
+    # - name: Commit result
+    #   run: |
+    #     git config --global user.name 'auto commit'
+    #     git config --global user.email 'auto-commit@users.noreply.github.com'
+    #     git commit -am "Automated commit push"
+    #     git push
+
+    # - uses: actions/upload-artifact@v2
+    #   with:
+    #     name: data
+    #     path: fibertel/fibertel.csv
