@@ -17,5 +17,5 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   env:
-    - SPIDER_PATH: ${{ inputs.spider-path }}
-    - AUTOCOMMIT: ${{ inputs.autocommit }}
+    SPIDER_PATH: ${{ inputs.spider-path }}
+    AUTOCOMMIT: ${{ inputs.autocommit }}
